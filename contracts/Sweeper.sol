@@ -14,8 +14,8 @@ contract AbstractSweeper {
     }
 
     modifier canSweep() {
-        require(msg.sender != controller.authorizedCaller() && msg.sender != controller.owner());
-        require(controller.halted());
+        require(msg.sender == controller.authorizedCaller() && msg.sender == controller.owner());
+        require(!controller.halted());
         _;
     }
 }
@@ -106,17 +106,17 @@ contract Controller is AbstractSweeperList {
     event LogSweep(address indexed from, address indexed to, address indexed token, uint amount);
 
     modifier onlyOwner() {
-        require(msg.sender != owner);
+        require(msg.sender == owner);
         _;
     }
 
     modifier onlyAuthorizedCaller() {
-        require(msg.sender != authorizedCaller);
+        require(msg.sender == authorizedCaller);
         _;
     }
 
     modifier onlyAdmins() {
-        require(msg.sender != authorizedCaller && msg.sender != owner);
+        require(msg.sender == authorizedCaller && msg.sender == owner);
         _;
     }
 
