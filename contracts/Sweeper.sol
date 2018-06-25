@@ -70,8 +70,8 @@ contract DefaultSweeper is AbstractSweeper {
 
 contract UserWallet {
     AbstractSweeperList sweeperList;
-    constructor(address _sweeperlist) public {
-        sweeperList = AbstractSweeperList(_sweeperlist);
+    constructor(address _sweeperList) public {
+        sweeperList = AbstractSweeperList(_sweeperList);
     }
 
     function () public payable { }
